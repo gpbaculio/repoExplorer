@@ -42,8 +42,8 @@ const RepositoryNameQuery = graphql`
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
-  // const data = useLazyLoadQuery<AppQuery>(RepositoryNameQuery, {}, {});
-  // console.log('data: ', data);
+  const data = useLazyLoadQuery<AppQuery>(RepositoryNameQuery, {}, {});
+
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -54,7 +54,7 @@ const Section: React.FC<{
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
-        te
+        {data.repository?.name}
       </Text>
       <Text
         style={[
