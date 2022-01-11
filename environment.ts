@@ -10,7 +10,6 @@ import {
   GraphQLResponse,
 } from 'relay-runtime';
 import Config from 'react-native-config';
-
 const getRequestBodyWithUploadables = (
   _request: RequestParameters,
   _variables: Variables,
@@ -52,7 +51,7 @@ const fetchGraphQL = async (
   uploadables?: UploadableMap | null | undefined,
 ): Promise<GraphQLResponse> => {
   const token = Config.GITHUB_AUTH_TOKEN;
-  console.log('token: ', token);
+
   if (token == null || token === '') {
     throw new Error(
       'This app requires a GitHub authentication token to be configured.',
