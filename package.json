@@ -17,7 +17,9 @@
     "artifactDirectory": "./src/__generated__"
   },
   "dependencies": {
+    "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/native": "^6.0.6",
+    "@react-navigation/stack": "^6.0.11",
     "@types/react-relay": "^11.0.3",
     "@types/relay-test-utils": "^6.0.5",
     "babel-plugin-relay": "^13.0.0",
@@ -25,6 +27,7 @@
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-config": "^1.4.5",
+    "react-native-gesture-handler": "^2.1.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-relay": "^13.0.0",
