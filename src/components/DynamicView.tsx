@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 
-interface DynamicViewProps {
+export interface DynamicViewProps {
   children?: ReactNode;
   flexDirection?: ViewStyle['flexDirection'];
   alignItems?: ViewStyle['alignItems'];
@@ -51,7 +51,7 @@ interface DynamicViewProps {
   zIndex?: ViewStyle['zIndex'];
 }
 
-const RView = ({
+const DynamicView = ({
   children,
   flex,
   flexDirection,
@@ -153,4 +153,4 @@ const RView = ({
   </View>
 );
 
-export default RView;
+export default DynamicView;
