@@ -1,5 +1,4 @@
 import React, {Suspense, useState} from 'react';
-import {Pressable} from 'react-native';
 
 import {
   DynamicPressable,
