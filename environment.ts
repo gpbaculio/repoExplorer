@@ -10,6 +10,7 @@ import {
   GraphQLResponse,
 } from 'relay-runtime';
 import Config from 'react-native-config';
+
 const getRequestBodyWithUploadables = (
   _request: RequestParameters,
   _variables: Variables,
