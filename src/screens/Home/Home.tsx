@@ -2,6 +2,7 @@ import React, {Suspense, useState} from 'react';
 import {Pressable} from 'react-native';
 
 import {
+  DynamicPressable,
   DynamicText,
   DynamicView,
   ErrorBoundaryWithRetry,
@@ -32,12 +33,18 @@ const Home = () => {
           }>
           <ErrorBoundaryWithRetry
             fallback={({error, retry}) => (
-              <>
+              <DynamicView flex={1} justifyContent="center" alignItems="center">
                 <DynamicText color="red">{error}</DynamicText>
                 {/* Render a button to retry; this will attempt to re-render the
             content inside the boundary, i.e. the query component */}
-                <Pressable onPress={retry}>Retry</Pressable>
-              </>
+                <DynamicPressable
+                  backgroundColor="#007BFF"
+                  paddingHorizontal={12}
+                  paddingVertical={8}
+                  onPress={retry}>
+                  <DynamicText color="#ffffff">{error}</DynamicText>
+                </DynamicPressable>
+              </DynamicView>
             )}>
             {({fetchKey}) => {
               // If we have retried, use the new `retryQueryRef` provided
