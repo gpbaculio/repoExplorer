@@ -16,10 +16,11 @@ class ErrorBoundaryWithRetry extends React.Component<
 > {
   state = {error: null, fetchKey: 0};
 
-  static getDerivedStateFromError(error: string) {
-    return {error, fetchKey: 0};
+  componentDidCatch(error: any) {
+    this.setState({
+      error: `${error}`,
+    });
   }
-
   retry = () => {
     this.setState(prev => ({
       // Clear the error
