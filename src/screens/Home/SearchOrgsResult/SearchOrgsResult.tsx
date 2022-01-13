@@ -1,9 +1,13 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import React, {useCallback} from 'react';
 import {graphql, useLazyLoadQuery} from 'react-relay';
 
-import {DynamicText, DynamicView} from '../../../components';
+import {DynamicPressable} from '../../../components';
+import {AppStackParamList} from '../../../navigation/Navigation';
 
 import {SearchOrgsResultQuery} from '../../../__generated__/SearchOrgsResultQuery.graphql';
+import Login from './Login';
 
 interface ResultProps {
   login: string;
@@ -13,8 +17,7 @@ interface ResultProps {
 const SearchOrgsResultQueryGraphQL = graphql`
   query SearchOrgsResultQuery($login: String!) {
     repositoryOwner(login: $login) {
-      login
-      id
+      ...Login_repositoryOwner
     }
   }
 `;
@@ -23,24 +26,10 @@ const Result = ({login, fetchKey}: ResultProps) => {
   const {repositoryOwner} = useLazyLoadQuery<SearchOrgsResultQuery>(
     SearchOrgsResultQueryGraphQL,
     {login},
-    {fetchKey},
+    {fetchKey, fetchPolicy: 'network-only'},
   );
-  return (
-    <DynamicView
-      marginTop={8}
-      width="100%"
-      borderRadius={4}
-      backgroundColor="#161B22"
-      paddingHorizontal={12}
-      paddingVertical={8}
-      justifyContent="center"
-      borderWidth={1}
-      borderColor="#30363d">
-      <DynamicText fontWeight="bold" color="#fff" fontSize={18}>
-        {repositoryOwner?.login || 'Not found'}
-      </DynamicText>
-    </DynamicView>
-  );
+
+  return <Login repositoryOwner={repositoryOwner} fetchKey={fetchKey} />;
 };
 
 export default Result;

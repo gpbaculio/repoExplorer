@@ -1,33 +1,49 @@
-import React, {Suspense} from 'react';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {Home, Result} from '../screens';
 
-const AppStack = createStackNavigator();
-const HomeComponent = () => (
-  <Suspense fallback={null}>
-    <Home />
-  </Suspense>
-);
+export type AppStackParamList = {
+  Home: undefined;
+  Result: {
+    login: string;
+    fetchKey: number;
+  };
+};
+
+const AppStack = createStackNavigator<AppStackParamList>();
 
 const Navigation = () => {
   return (
-    <AppStack.Navigator>
+    <AppStack.Navigator
+      screenOptions={{
+        headerStyle: styles.headerStyle,
+        headerTitleStyle: styles.headerTitleStyle,
+      }}>
+      <AppStack.Screen name="Home" component={Home} />
       <AppStack.Screen
-        options={{
-          headerStyle: {
-            backgroundColor: '#161B22',
-          },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-        }}
-        name="Home"
-        component={HomeComponent}
+        options={({route}) => ({
+          title: route.params.login,
+          headerBackTitleStyle: styles.resultHeaderBackTitleStyle,
+        })}
+        name="Result"
+        component={Result}
       />
-      <AppStack.Screen name="Result" component={Result} />
     </AppStack.Navigator>
   );
 };
 
 export default Navigation;
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: '#161B22',
+  },
+  headerTitleStyle: {
+    color: '#fff',
+  },
+  resultHeaderBackTitleStyle: {
+    color: '#fff',
+  },
+});

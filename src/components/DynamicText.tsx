@@ -27,7 +27,7 @@ interface RTextProps {
   fontWeight?: TextStyle['fontWeight'];
 }
 
-const RText = ({
+const DynamicText = ({
   children,
   flex,
   padding,
@@ -79,4 +79,4 @@ const RText = ({
   </Text>
 );
 
-export default RText;
+export default DynamicText;

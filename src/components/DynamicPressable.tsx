@@ -1,57 +1,9 @@
-import React, {ReactNode} from 'react';
-import {StyleProp, View, ViewStyle} from 'react-native';
+import React from 'react';
+import {Pressable, PressableProps} from 'react-native';
 
-export interface DynamicViewProps {
-  children?: ReactNode;
-  flexDirection?: ViewStyle['flexDirection'];
-  alignItems?: ViewStyle['alignItems'];
-  justifyContent?: ViewStyle['justifyContent'];
-  flex?: ViewStyle['flex'];
-  padding?: ViewStyle['padding'];
-  paddingRight?: ViewStyle['paddingRight'];
-  paddingLeft?: ViewStyle['paddingLeft'];
-  paddingTop?: ViewStyle['paddingTop'];
-  paddingBottom?: ViewStyle['paddingBottom'];
-  paddingVertical?: ViewStyle['paddingVertical'];
-  paddingHorizontal?: ViewStyle['paddingHorizontal'];
-  margin?: ViewStyle['margin'];
-  marginRight?: ViewStyle['marginRight'];
-  marginLeft?: ViewStyle['marginLeft'];
-  marginTop?: ViewStyle['marginTop'];
-  marginBottom?: ViewStyle['marginBottom'];
-  marginVertical?: ViewStyle['marginVertical'];
-  marginHorizontal?: ViewStyle['marginHorizontal'];
-  style?: StyleProp<ViewStyle>;
-  borderTopWidth?: ViewStyle['borderTopWidth'];
-  borderTopColor?: ViewStyle['borderTopColor'];
-  borderLeftWidth?: ViewStyle['borderLeftWidth'];
-  borderLeftColor?: ViewStyle['borderLeftColor'];
-  borderRightWidth?: ViewStyle['borderRightWidth'];
-  borderRightColor?: ViewStyle['borderRightColor'];
-  borderBottomWidth?: ViewStyle['borderBottomWidth'];
-  borderBottomColor?: ViewStyle['borderBottomColor'];
-  borderWidth?: ViewStyle['borderWidth'];
-  borderColor?: ViewStyle['borderColor'];
-  borderRadius?: ViewStyle['borderRadius'];
-  borderTopLeftRadius?: ViewStyle['borderTopLeftRadius'];
-  borderTopRightRadius?: ViewStyle['borderTopRightRadius'];
-  borderBottomLeftRadius?: ViewStyle['borderBottomLeftRadius'];
-  borderBottomRightRadius?: ViewStyle['borderBottomRightRadius'];
-  width?: ViewStyle['width'];
-  height?: ViewStyle['height'];
-  backgroundColor?: ViewStyle['backgroundColor'];
-  position?: ViewStyle['position'];
-  left?: ViewStyle['left'];
-  right?: ViewStyle['right'];
-  top?: ViewStyle['top'];
-  bottom?: ViewStyle['bottom'];
-  display?: ViewStyle['display'];
-  testID?: string;
-  opacity?: ViewStyle['opacity'];
-  zIndex?: ViewStyle['zIndex'];
-}
+import {DynamicViewProps} from './DynamicView';
 
-const DynamicView = ({
+const RView = ({
   children,
   flex,
   flexDirection,
@@ -99,9 +51,11 @@ const DynamicView = ({
   testID,
   opacity,
   zIndex,
-}: DynamicViewProps) => (
-  <View
+  onPress,
+}: DynamicViewProps & PressableProps) => (
+  <Pressable
     testID={testID}
+    onPress={onPress}
     style={[
       !!flex && {flex},
       !!flexDirection && {flexDirection},
@@ -150,7 +104,7 @@ const DynamicView = ({
       !!zIndex && {zIndex},
     ]}>
     {children}
-  </View>
+  </Pressable>
 );
 
-export default DynamicView;
+export default RView;
