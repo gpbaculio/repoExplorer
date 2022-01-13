@@ -1,4 +1,5 @@
 import React, {Suspense, useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 
 import {
   DynamicPressable,
@@ -37,7 +38,6 @@ const Home = () => {
           {({fetchKey}) => {
             // If we have retried, use the new `retryQueryRef` provided
             // by the Error Boundary
-            console.log('new fetchKey: ', fetchKey);
             return (
               <Suspense
                 fallback={
@@ -48,8 +48,9 @@ const Home = () => {
                     backgroundColor="#161B22"
                     paddingHorizontal={12}
                     paddingVertical={8}
-                    justifyContent="center">
-                    <DynamicText color="#868f99">Loading...</DynamicText>
+                    justifyContent="center"
+                    alignItems="center">
+                    <ActivityIndicator size="small" color="#868f99" />
                   </DynamicView>
                 }>
                 <SearchOrgsResult login={debouncedText} fetchKey={fetchKey} />
