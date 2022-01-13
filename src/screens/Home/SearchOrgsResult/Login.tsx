@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {graphql, useFragment} from 'react-relay';
 
 import {DynamicPressable, DynamicText} from '../../../components';
@@ -23,6 +23,13 @@ const Login = ({repositoryOwner, fetchKey}: LoginProps) => {
   const result = useFragment(LoginFragmentGraphQL, repositoryOwner);
 
   const {navigate} = useNavigation<StackNavigationProp<AppStackParamList>>();
+
+  const onLoginPress = useCallback(() => {
+    if (result && result.login) {
+      navigate('Result', {login: result.login, fetchKey});
+    }
+  }, [result, navigate, fetchKey]);
+
   return (
     <DynamicPressable
       marginTop={8}
@@ -34,12 +41,7 @@ const Login = ({repositoryOwner, fetchKey}: LoginProps) => {
       justifyContent="center"
       borderWidth={1}
       borderColor="#30363d"
-      onPress={() => {
-        console.log('repositoryOwner: ', result?.login);
-        if (result && result.login) {
-          navigate('Result', {login: result.login, fetchKey});
-        }
-      }}>
+      onPress={onLoginPress}>
       <DynamicText fontWeight="bold" color="#fff" fontSize={18}>
         {result?.login || 'Not found'}
       </DynamicText>
