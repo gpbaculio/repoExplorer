@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9ac56a97cf1af210d3453448584070bb>>
+ * @generated SignedSource<<fb54c48e7c2d5744c15aac3f590404d3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,14 +9,14 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
+import { FragmentRefs } from "relay-runtime";
 export type SearchOrgsResultQuery$variables = {
   login: string;
 };
 export type SearchOrgsResultQueryVariables = SearchOrgsResultQuery$variables;
 export type SearchOrgsResultQuery$data = {
   readonly repositoryOwner: {
-    readonly login: string;
-    readonly id: string;
+    readonly " $fragmentSpreads": FragmentRefs<"Login_repositoryOwner">;
   } | null;
 };
 export type SearchOrgsResultQueryResponse = SearchOrgsResultQuery$data;
@@ -39,21 +39,7 @@ v1 = [
     "name": "login",
     "variableName": "login"
   }
-],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "login",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-};
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -69,8 +55,11 @@ return {
         "name": "repositoryOwner",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/)
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "Login_repositoryOwner"
+          }
         ],
         "storageKey": null
       }
@@ -99,24 +88,40 @@ return {
             "name": "__typename",
             "storageKey": null
           },
-          (v2/*: any*/),
-          (v3/*: any*/)
+          {
+            "kind": "TypeDiscriminator",
+            "abstractKey": "__isRepositoryOwner"
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "login",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "id",
+            "storageKey": null
+          }
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "beb5ace02a37fce64d4cd211d76a3b64",
+    "cacheID": "8839ac77281a263b4e9484b7d5c609bb",
     "id": null,
     "metadata": {},
     "name": "SearchOrgsResultQuery",
     "operationKind": "query",
-    "text": "query SearchOrgsResultQuery(\n  $login: String!\n) {\n  repositoryOwner(login: $login) {\n    __typename\n    login\n    id\n  }\n}\n"
+    "text": "query SearchOrgsResultQuery(\n  $login: String!\n) {\n  repositoryOwner(login: $login) {\n    __typename\n    ...Login_repositoryOwner\n    id\n  }\n}\n\nfragment Login_repositoryOwner on RepositoryOwner {\n  __isRepositoryOwner: __typename\n  login\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "88a49b3ac3d4fb3971377e364515d443";
+(node as any).hash = "ce36901e992e0c3ba1a199cfadd98f76";
 
 export default node;
