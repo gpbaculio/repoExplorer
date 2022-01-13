@@ -26,6 +26,7 @@ const Navigation = () => {
         options={({route}) => ({
           title: route.params.login,
           headerBackTitleStyle: styles.resultHeaderBackTitleStyle,
+          headerTintColor: '#30363d',
         })}
         name="Result"
         component={Result}

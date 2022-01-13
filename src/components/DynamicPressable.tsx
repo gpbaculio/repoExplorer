@@ -52,9 +52,11 @@ const RView = ({
   opacity,
   zIndex,
   onPress,
+  disabled,
 }: DynamicViewProps & PressableProps) => (
   <Pressable
     testID={testID}
+    disabled={disabled}
     onPress={onPress}
     style={[
       !!flex && {flex},

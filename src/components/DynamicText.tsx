@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {StyleProp, Text, TextStyle} from 'react-native';
+import {StyleProp, Text, TextProps, TextStyle} from 'react-native';
 
 interface RTextProps {
   children: ReactNode;
@@ -51,7 +51,7 @@ const DynamicText = ({
   marginHorizontal,
   testID,
   fontWeight,
-}: RTextProps) => (
+}: RTextProps & TextProps) => (
   <Text
     testID={testID}
     style={[

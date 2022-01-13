@@ -1,11 +1,7 @@
 import React, {Suspense, useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 
-import {
-  DynamicPressable,
-  DynamicText,
-  DynamicView,
-  ErrorBoundaryWithRetry,
-} from '../../components';
+import {DynamicView, ErrorBoundaryWithRetry, ErrorUI} from '../../components';
 import {useDebounce} from '../../hooks';
 import SearchOrgsInput from './SearchOrgsInput';
 import SearchOrgsResult from './SearchOrgsResult';
@@ -20,24 +16,11 @@ const Home = () => {
       {!!debouncedText && (
         <ErrorBoundaryWithRetry
           fallback={({error, retry}) => (
-            <DynamicView flex={1} justifyContent="center" alignItems="center">
-              <DynamicText color="red">{error}</DynamicText>
-              {/* Render a button to retry; this will attempt to re-render the
-            content inside the boundary, i.e. the query component */}
-              <DynamicPressable
-                backgroundColor="#007BFF"
-                paddingHorizontal={12}
-                paddingVertical={8}
-                marginTop={16}
-                onPress={retry}>
-                <DynamicText color="#ffffff">Retry</DynamicText>
-              </DynamicPressable>
-            </DynamicView>
+            <ErrorUI error={error} retry={retry} />
           )}>
           {({fetchKey}) => {
             // If we have retried, use the new `retryQueryRef` provided
             // by the Error Boundary
-            console.log('new fetchKey: ', fetchKey);
             return (
               <Suspense
                 fallback={
@@ -48,8 +31,9 @@ const Home = () => {
                     backgroundColor="#161B22"
                     paddingHorizontal={12}
                     paddingVertical={8}
-                    justifyContent="center">
-                    <DynamicText color="#868f99">Loading...</DynamicText>
+                    justifyContent="center"
+                    alignItems="center">
+                    <ActivityIndicator size="small" color="#868f99" />
                   </DynamicView>
                 }>
                 <SearchOrgsResult login={debouncedText} fetchKey={fetchKey} />

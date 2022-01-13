@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<72469e057866b08b11b8aa489fba2f01>>
+ * @generated SignedSource<<a47d210db0d891bfa1cc744c3cfa5180>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,8 +13,9 @@ import { FragmentRefs } from "relay-runtime";
 export type Repositories_repositories$data = {
   readonly repositories: {
     readonly edges: ReadonlyArray<{
+      readonly cursor: string;
       readonly node: {
-        readonly nameWithOwner: string;
+        readonly name: string;
         readonly issues: {
           readonly totalCount: number;
         };
@@ -23,6 +24,13 @@ export type Repositories_repositories$data = {
         };
       } | null;
     } | null> | null;
+    readonly pageInfo: {
+      readonly startCursor: string | null;
+      readonly endCursor: string | null;
+      readonly hasNextPage: boolean;
+      readonly hasPreviousPage: boolean;
+    };
+    readonly totalCount: number;
   };
   readonly id: string;
   readonly " $fragmentType": "Repositories_repositories";
@@ -37,14 +45,15 @@ const node: ReaderFragment = (function(){
 var v0 = [
   "repositories"
 ],
-v1 = [
-  {
-    "alias": null,
-    "args": null,
-    "kind": "ScalarField",
-    "name": "totalCount",
-    "storageKey": null
-  }
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "totalCount",
+  "storageKey": null
+},
+v2 = [
+  (v1/*: any*/)
 ];
 return {
   "argumentDefinitions": [
@@ -57,6 +66,13 @@ return {
       "defaultValue": "",
       "kind": "LocalArgument",
       "name": "cursor"
+    },
+    {
+      "defaultValue": [
+        "OPEN"
+      ],
+      "kind": "LocalArgument",
+      "name": "states"
     }
   ],
   "kind": "Fragment",
@@ -106,6 +122,13 @@ return {
             {
               "alias": null,
               "args": null,
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
               "concreteType": "Repository",
               "kind": "LinkedField",
               "name": "node",
@@ -115,24 +138,24 @@ return {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "nameWithOwner",
+                  "name": "name",
                   "storageKey": null
                 },
                 {
                   "alias": null,
                   "args": [
                     {
-                      "kind": "Literal",
+                      "kind": "Variable",
                       "name": "states",
-                      "value": "OPEN"
+                      "variableName": "states"
                     }
                   ],
                   "concreteType": "IssueConnection",
                   "kind": "LinkedField",
                   "name": "issues",
                   "plural": false,
-                  "selections": (v1/*: any*/),
-                  "storageKey": "issues(states:\"OPEN\")"
+                  "selections": (v2/*: any*/),
+                  "storageKey": null
                 },
                 {
                   "alias": null,
@@ -141,7 +164,7 @@ return {
                   "kind": "LinkedField",
                   "name": "stargazers",
                   "plural": false,
-                  "selections": (v1/*: any*/),
+                  "selections": (v2/*: any*/),
                   "storageKey": null
                 },
                 {
@@ -152,13 +175,6 @@ return {
                   "storageKey": null
                 }
               ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "cursor",
               "storageKey": null
             }
           ],
@@ -176,6 +192,13 @@ return {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
+              "name": "startCursor",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
               "name": "endCursor",
               "storageKey": null
             },
@@ -185,10 +208,18 @@ return {
               "kind": "ScalarField",
               "name": "hasNextPage",
               "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "hasPreviousPage",
+              "storageKey": null
             }
           ],
           "storageKey": null
-        }
+        },
+        (v1/*: any*/)
       ],
       "storageKey": null
     },
@@ -205,6 +236,6 @@ return {
 };
 })();
 
-(node as any).hash = "607615719c7b2d90422a70c69f9cfd63";
+(node as any).hash = "7539dca925e5dfb3ce6141baad3e5f7f";
 
 export default node;

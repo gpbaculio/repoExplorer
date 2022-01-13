@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<29169a032e0089950d1ed8ed55b5e4ce>>
+ * @generated SignedSource<<bc1f385f1b98f114d21bedf860295d89>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,9 +10,11 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
+export type IssueState = "CLOSED" | "OPEN" | "%future added value";
 export type RepositoriesPaginationQuery$variables = {
   count?: number | null;
   cursor?: string | null;
+  states?: ReadonlyArray<IssueState> | null;
   id: string;
 };
 export type RepositoriesPaginationQueryVariables = RepositoriesPaginationQuery$variables;
@@ -28,45 +30,55 @@ export type RepositoriesPaginationQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": 10,
-    "kind": "LocalArgument",
-    "name": "count"
-  },
-  {
-    "defaultValue": "",
-    "kind": "LocalArgument",
-    "name": "cursor"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "id"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": 10,
+  "kind": "LocalArgument",
+  "name": "count"
+},
+v1 = {
+  "defaultValue": "",
+  "kind": "LocalArgument",
+  "name": "cursor"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "id"
+},
+v3 = {
+  "defaultValue": [
+    "OPEN"
+  ],
+  "kind": "LocalArgument",
+  "name": "states"
+},
+v4 = [
   {
     "kind": "Variable",
     "name": "id",
     "variableName": "id"
   }
 ],
-v2 = {
+v5 = {
+  "kind": "Variable",
+  "name": "states",
+  "variableName": "states"
+},
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v3 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v4 = [
+v8 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -78,25 +90,31 @@ v4 = [
     "variableName": "count"
   }
 ],
-v5 = [
-  {
-    "alias": null,
-    "args": null,
-    "kind": "ScalarField",
-    "name": "totalCount",
-    "storageKey": null
-  }
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "totalCount",
+  "storageKey": null
+},
+v10 = [
+  (v9/*: any*/)
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v2/*: any*/),
+      (v3/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "RepositoriesPaginationQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v4/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
         "name": "node",
@@ -113,7 +131,8 @@ return {
                 "kind": "Variable",
                 "name": "cursor",
                 "variableName": "cursor"
-              }
+              },
+              (v5/*: any*/)
             ],
             "kind": "FragmentSpread",
             "name": "Repositories_repositories"
@@ -127,26 +146,31 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v3/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Operation",
     "name": "RepositoriesPaginationQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v4/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
         "name": "node",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
+          (v6/*: any*/),
+          (v7/*: any*/),
           {
             "kind": "InlineFragment",
             "selections": [
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v8/*: any*/),
                 "concreteType": "RepositoryConnection",
                 "kind": "LinkedField",
                 "name": "repositories",
@@ -163,6 +187,13 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "cursor",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "Repository",
                         "kind": "LinkedField",
                         "name": "node",
@@ -172,24 +203,20 @@ return {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "nameWithOwner",
+                            "name": "name",
                             "storageKey": null
                           },
                           {
                             "alias": null,
                             "args": [
-                              {
-                                "kind": "Literal",
-                                "name": "states",
-                                "value": "OPEN"
-                              }
+                              (v5/*: any*/)
                             ],
                             "concreteType": "IssueConnection",
                             "kind": "LinkedField",
                             "name": "issues",
                             "plural": false,
-                            "selections": (v5/*: any*/),
-                            "storageKey": "issues(states:\"OPEN\")"
+                            "selections": (v10/*: any*/),
+                            "storageKey": null
                           },
                           {
                             "alias": null,
@@ -198,19 +225,12 @@ return {
                             "kind": "LinkedField",
                             "name": "stargazers",
                             "plural": false,
-                            "selections": (v5/*: any*/),
+                            "selections": (v10/*: any*/),
                             "storageKey": null
                           },
-                          (v3/*: any*/),
-                          (v2/*: any*/)
+                          (v7/*: any*/),
+                          (v6/*: any*/)
                         ],
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "cursor",
                         "storageKey": null
                       }
                     ],
@@ -228,6 +248,13 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "startCursor",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "endCursor",
                         "storageKey": null
                       },
@@ -237,16 +264,24 @@ return {
                         "kind": "ScalarField",
                         "name": "hasNextPage",
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasPreviousPage",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
-                  }
+                  },
+                  (v9/*: any*/)
                 ],
                 "storageKey": null
               },
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v8/*: any*/),
                 "filters": null,
                 "handle": "connection",
                 "key": "Repositories_repositories_repositories",
@@ -263,16 +298,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "46cff9467f785518942d91d719c6a015",
+    "cacheID": "8f930e2213de89b2d160f2ac4ac2fd27",
     "id": null,
     "metadata": {},
     "name": "RepositoriesPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoriesPaginationQuery(\n  $count: Int = 10\n  $cursor: String = \"\"\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_1G22uz\n    id\n  }\n}\n\nfragment Repositories_repositories_1G22uz on RepositoryOwner {\n  __isRepositoryOwner: __typename\n  repositories(first: $count, after: $cursor) {\n    edges {\n      node {\n        nameWithOwner\n        issues(states: OPEN) {\n          totalCount\n        }\n        stargazers {\n          totalCount\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query RepositoriesPaginationQuery(\n  $count: Int = 10\n  $cursor: String = \"\"\n  $states: [IssueState!] = [OPEN]\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_a4QoT\n    id\n  }\n}\n\nfragment Repositories_repositories_a4QoT on RepositoryOwner {\n  __isRepositoryOwner: __typename\n  repositories(first: $count, after: $cursor) {\n    edges {\n      cursor\n      node {\n        name\n        issues(states: $states) {\n          totalCount\n        }\n        stargazers {\n          totalCount\n        }\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n    totalCount\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "607615719c7b2d90422a70c69f9cfd63";
+(node as any).hash = "7539dca925e5dfb3ce6141baad3e5f7f";
 
 export default node;
